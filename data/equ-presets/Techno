@@ -1,0 +1,12 @@
+<equalizer name="Techno">
+  <band num="0">8</band>
+  <band num="1">5.6</band>
+  <band num="2">-1.11022E-15</band>
+  <band num="3">-5.6</band>
+  <band num="4">-4.8</band>
+  <band num="5">-1.11022E-15</band>
+  <band num="6">8</band>
+  <band num="7">9.6</band>
+  <band num="8">9.6</band>
+  <band num="9">8.8</band>
+</equalizer>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plextalk>
+
+	<languages>
+		<lang locale="en_US">English</lang>
+		<lang locale="zh_CN">中文简体</lang>
+		<lang locale="zh_TW">中文繁體</lang>
+		<lang locale="hi_IN">हिंदी </lang>
+	</languages>
+
+	<FM>
+		<ranglow>87M</ranglow>
+		<ranghigh>108M</ranghigh>
+		<spacing>100K</spacing>
+		<searchlow>87.5</searchlow>
+	</FM>
+
+	<timesystem>
+		<hoursystem>1</hoursystem>
+		<format>1</format>
+	</timesystem>
+
+	<aes_key>345757898709980998635</aes_key>
+
+</plextalk>

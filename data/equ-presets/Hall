@@ -1,0 +1,12 @@
+<equalizer name="Large Hall">
+  <band num="0">10.4</band>
+  <band num="1">10.4</band>
+  <band num="2">5.6</band>
+  <band num="3">5.6</band>
+  <band num="4">-1.11022E-15</band>
+  <band num="5">-4.8</band>
+  <band num="6">-4.8</band>
+  <band num="7">-4.8</band>
+  <band num="8">-1.11022E-15</band>
+  <band num="9">-1.11022E-15</band>
+</equalizer>

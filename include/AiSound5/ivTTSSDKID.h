@@ -1,0 +1,11 @@
+
+/* SDK ID */
+
+#ifndef MTTS_1_0_SDK_CONSISTENCE__H
+#define MTTS_1_0_SDK_CONSISTENCE__H
+
+#define AISOUND_SDK_USERID ((ivCStrA)"\x38\x30\x63\x36\x62\x63\x62\x38\x64\x65\x66\x61\x34\x63\x66\x33\x61\x32\x63\x64\x38\x32\x64\x66\x37\x34\x38\x35\x36\x32\x34\x38")
+
+#define AISOUND_5_0_SDK_USERID ((ivCStrA)("c5622657dc414e9199e974e0374d6e"))
+#endif /* !AISOUND_SDK_CONSISTENCE__H */
+

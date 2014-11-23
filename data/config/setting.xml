@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<settings>
+
+	<book>
+		<speed>0</speed>
+		<repeat>0</repeat>
+		<audio_equalizer>0</audio_equalizer>
+		<text_equalizer>0</text_equalizer>
+	</book>
+
+	<music>
+		<speed>0</speed>
+		<repeat>0</repeat>
+		<equalizer>0</equalizer>
+	</music>
+
+	<radio>
+		<output>0</output>
+	</radio>
+
+	<record>
+		<saveto>0</saveto>
+	</record>
+
+	<guide>
+		<speed>0</speed>
+		<equalizer>0</equalizer>
+	</guide>
+
+	<timer num="1">
+		<enabled>0</enabled>
+		<elapse>2</elapse>
+	</timer>
+
+	<timer num="2">
+		<enabled>0</enabled>
+		<elapse>2</elapse>
+	</timer>
+
+	<lcd>
+		<screensaver>2</screensaver>
+		<fontsize>16</fontsize>
+		<theme>1</theme>
+		<backlight>0</backlight>
+	</lcd>
+
+	<language>zh_CN</language>
+
+	<tts>
+		<voice_species>1</voice_species>
+		<chinese>0</chinese>
+	</tts>
+
+</settings>

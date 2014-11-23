@@ -1,0 +1,12 @@
+<equalizer name="Live">
+  <band num="0">-4.8</band>
+  <band num="1">-1.11022E-15</band>
+  <band num="2">4</band>
+  <band num="3">5.6</band>
+  <band num="4">5.6</band>
+  <band num="5">5.6</band>
+  <band num="6">4</band>
+  <band num="7">2.4</band>
+  <band num="8">2.4</band>
+  <band num="9">2.4</band>
+</equalizer>

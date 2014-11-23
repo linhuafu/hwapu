@@ -1,0 +1,21 @@
+#ifndef VPROMPT_DEFINES__H
+#define VPROMPT_DEFINES__H
+
+#include "plextalk-config.h"
+//lhf
+#define VPROMPT_AUDIO_BU		PLEXTALK_VPROMPT_DIR "audio_bu.mp3"
+#define VPROMPT_AUDIO_CANCEL	PLEXTALK_VPROMPT_DIR "audio_cancel.mp3"
+#define VPROMPT_AUDIO_INPUT		PLEXTALK_VPROMPT_DIR "audio_input.mp3"
+#define VPROMPT_AUDIO_KON		PLEXTALK_VPROMPT_DIR "audio_kon.mp3"
+#define VPROMPT_AUDIO_POWER_OFF	PLEXTALK_VPROMPT_DIR "audio_power_off.mp3"
+#define VPROMPT_AUDIO_POWER_ON	PLEXTALK_VPROMPT_DIR "audio_power_on.mp3"
+#define VPROMPT_AUDIO_PU		PLEXTALK_VPROMPT_DIR "audio_pu.mp3"
+#define VPROMPT_AUDIO_USB_OFF	PLEXTALK_VPROMPT_DIR "audio_usb_off.mp3"
+#define VPROMPT_AUDIO_USB_ON	PLEXTALK_VPROMPT_DIR "audio_usb_on.mp3"
+#define VPROMPT_AUDIO_WAIT_BEEP	PLEXTALK_VPROMPT_DIR "audio_wait_beep.mp3"
+#define VPROMPT_AUDIO_YES		PLEXTALK_VPROMPT_DIR "audio_yes.mp3"
+#define VPROMPT_SOUND_A			PLEXTALK_VPROMPT_DIR "Sound_A.mp3"
+#define VPROMPT_SOUND_B			PLEXTALK_VPROMPT_DIR "Sound_B.mp3"
+#define VPROMPT_SOUND_C			PLEXTALK_VPROMPT_DIR "Sound_C.mp3"
+
+#endif /* VPROMPT_DEFINES__H */

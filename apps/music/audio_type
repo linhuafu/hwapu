@@ -1,0 +1,75 @@
+#ifndef __AUDIO_TYPE_H__
+#define __AUDIO_TYPE_H__
+#include <dirent.h>
+
+#define PLAY_TRACK			0x09
+#define PLAY_ALBUM			0x10
+
+enum NAVI{
+	NAVI_SEEK_BOOKMARK = 0,			//seek with bookmark
+	NAVI_SEEK_SECONDS,				//seek with 30 s
+	NAVI_SEEK_MINUTES,				//seek with 10mintues
+	NAVI_SEEK_TRACK,				//seek with track
+	NAVI_SEEK_ALBUM,				//seek with album
+};
+
+
+enum REPEAT_MODE{
+	STANDARD_PLAY = 0 ,  
+	TRACK_REPEAT,		 
+	ALBUM_REPEAT,		
+	ALL_ALBUM_REPEAT,	
+	SHUFFLE_PLAY,
+};
+
+
+struct start{
+
+	const char* path;
+	int start_time;
+
+};
+
+
+struct _bmk_no_info{
+
+	int current_bmk_no;
+	int total_bmk_no;
+};
+
+
+struct _dir_info{
+
+	char dir_path[512];
+	DIR* music_dir;
+	struct dirent* music_dirent;
+	char music_path[256];
+	int file_cur_offset;
+	int file_max_offset;
+
+};
+
+
+struct audio_player{
+
+	struct start start_place;		//start place for create pthread
+
+	int play_mode;					//track mode or album mode
+	int repeat_mode;				//repeat mode
+	int effect_value;				//sound effect
+	int navi_value;					//navigation value
+	
+	float tempo;					//tempo
+	float pitch;					//pitch
+	float volume;					//volume
+
+	struct _dir_info dir_info;		//player dir info
+
+	struct _bmk_no_info bmk_no;		//player bookmark num info
+
+	double bands[10];				//bands for equalizer
+
+};
+
+
+#endif

@@ -1,0 +1,12 @@
+<equalizer name="Full Treble">
+  <band num="0">-9.6</band>
+  <band num="1">-9.6</band>
+  <band num="2">-9.6</band>
+  <band num="3">-4</band>
+  <band num="4">2.4</band>
+  <band num="5">11.2</band>
+  <band num="6">16</band>
+  <band num="7">16</band>
+  <band num="8">16</band>
+  <band num="9">16.8</band>
+</equalizer>

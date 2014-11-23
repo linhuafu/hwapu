@@ -1,0 +1,21 @@
+msgfmt zh_book.g.po -o ../mo/zh_CN/LC_MESSAGES/book.mo
+msgfmt zh_calculator.g.po -o ../mo/zh_CN/LC_MESSAGES/calculator.mo
+msgfmt zh_menu.g.po -o ../mo/zh_CN/LC_MESSAGES/menu.mo
+msgfmt zh_help.g.po -o ../mo/zh_CN/LC_MESSAGES/help.mo
+msgfmt zh_music.po -o ../mo/zh_CN/LC_MESSAGES/music.mo
+msgfmt zh_recorder.g.po -o ../mo/zh_CN/LC_MESSAGES/recorder.mo
+msgfmt zh_radio.g.po -o ../mo/zh_CN/LC_MESSAGES/radio.mo
+msgfmt zh_desktop.g.po -o ../mo/zh_CN/LC_MESSAGES/desktop.mo
+msgfmt zh_alarm.g.po -o ../mo/zh_CN/LC_MESSAGES/alarm.mo
+
+msgfmt tw_book.g.po -o ../mo/zh_TW/LC_MESSAGES/book.mo
+msgfmt tw_calculator.g.po -o ../mo/zh_TW/LC_MESSAGES/calculator.mo
+msgfmt tw_connect.g.po -o ../mo/zh_TW/LC_MESSAGES/connect.mo
+msgfmt tw_gmenu.g.po -o ../mo/zh_TW/LC_MESSAGES/gmenu.mo
+msgfmt tw_help.g.po -o ../mo/zh_TW/LC_MESSAGES/help.mo
+msgfmt tw_music.po -o ../mo/zh_TW/LC_MESSAGES/music.mo
+msgfmt tw_record.g.po -o ../mo/zh_TW/LC_MESSAGES/record.mo
+msgfmt tw_radio.g.po -o ../mo/zh_TW/LC_MESSAGES/radio.mo
+msgfmt tw_desktop.g.po -o ../mo/zh_TW/LC_MESSAGES/desktop.mo
+
+

@@ -1,0 +1,5 @@
+1.编译程序后，如果后缀名.PO的有改变，需要重新生成
+2.将Strres.xls的提示语拷贝到strres.po,并将编码转
+换为UTF-8(方法：使用UltraEdit，文件-》转换)，保存
+3.在windows环境运行，批处理Transstr.bat
+4.在liunx环境运行: sh po2mo.sh

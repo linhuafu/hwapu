@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<volume>
+
+	<book_audio output="speaker">15</book_audio>
+	<book_audio output="headphone">15</book_audio>
+
+	<book_text output="speaker">15</book_text>
+	<book_text output="headphone">15</book_text>
+
+	<music output="speaker">15</music>
+	<music output="headphone">15</music>
+
+	<radio output="speaker">15</radio>
+	<radio output="headphone">15</radio>
+
+	<record>15</record>
+
+	<guide>13</guide>
+
+</volume>
