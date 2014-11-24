@@ -919,6 +919,10 @@ OnWindowHotplug(WID__ wid, int device, int index, int action)
 			prepare_pc_connector();//add by appk
 			pc_connect_startup = 1;
 			PC_DBG_MSG("start to launch pc-connector!\n");
+			if (GetInfoStat()) {
+				plextalk_schedule_unlock();
+				SetInfoStat(0);
+			}
 			AppLauncher(M_PC_CONNECTOR, 1, 0, active_app >= 0 ? FUNC_MAIN_STR[active_app] : NULL);//appk 0->1
 			//if (desktop_state == DESKTOP_STATE_ALARM) {
 			desktop_state = DESKTOP_STATE_PC_CONNECTOR;

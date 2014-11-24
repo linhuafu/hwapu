@@ -25,5 +25,6 @@ transstr radio.g.po
 transstr menu.g.po
 transstr update_plextalk.g.po
 transstr pc-connector.g.po
+transstr jump-page.g.po
 pause
 

@@ -211,7 +211,6 @@ typedef struct
 } app_jump_page_result;
 
 //lhf end
-
 typedef union
 {
 	APP_REQUEST	type;
@@ -313,6 +312,4 @@ void NhelperDeleteResult(APP_DELETE_RESULT result);	//lhf
 void NhelperJumpPage(unsigned long ulpage); 	//lhf
 
 void NhelperJumpPageResult(APP_JUMP_RESULT result);	//lhf
-
-
 #endif //_STATUSBAR_H_

@@ -377,5 +377,4 @@ void NhelperJumpPageResult(APP_JUMP_RESULT result)
 	rqst->result = result;
 	NeuxMsgBroadcast(NULL, &msg);
 }
-
 //lhf

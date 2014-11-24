@@ -28,17 +28,21 @@ void Radio_Rec_InitStringBuf(struct radio_nano* nano,char *filename)
 					+ REMAIN_TIME_LABEL_SIZE + REMAIN_TIME_VALUE_SIZE;
 	
 	nano->textShow.pText = (char*)malloc(nano->textShow.totalItemSize); 
-	if(nano->textShow.pText == NULL) {
+	if(nano->textShow.pText == NULL) 
+	{
 		DBGMSG("malloc fail\n");
 		return;
 	}
 	memset(nano->textShow.pText,0x00,nano->textShow.totalItemSize);
 
-	if(StringStartWith(getenv("LANG"), "hi_IN")){
+	if(StringStartWith(getenv("LANG"), "hi_IN"))
+	{
 		offset = 1;
 		snprintf(nano->textShow.pText,nano->textShow.totalItemSize,"%s %s\n%s\n%s\n%s",
 			filename,_("Recording Time:"),"00:00:00",_("Remaining Time:"),radio_rec_time_to_string(nano->remain_time));
-	} else {
+	} 
+	else
+	{
 		offset = 0;
 		snprintf(nano->textShow.pText,nano->textShow.totalItemSize,"%s%s\n%s\n%s\n%s",
 			filename,_("Recording Time:"),"00:00:00",_("Remaining Time:"),radio_rec_time_to_string(nano->remain_time));

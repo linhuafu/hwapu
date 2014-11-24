@@ -332,14 +332,14 @@ page_tts (enum tts_type type, char* data)
 			*tts_is_running = 1;
 			//voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_PU);
 			voice_prompt_string2(0, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
-					tts_role, _("Colse the menu.")); 
+					tts_role, _("Close the menu")); 
 			voice_prompt_music(1, &vprompt_cfg, VPROMPT_AUDIO_CANCEL);
 			tts_exit_flag = 1;
 			break;
 		case TTS_FAILED_MOVE_PAGE:
 			voice_prompt_abort();
 			memset(buf,0x00,256);
-			snprintf(buf,256,"%s: %s",_("Failed to move the page."),_("Clear."));
+			snprintf(buf,256,"%s: %s",_("Failed to move the page"),_("clear"));
 			*tts_is_running = 1;
 			voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_BU);
 			voice_prompt_string2(1, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
@@ -349,7 +349,7 @@ page_tts (enum tts_type type, char* data)
 		case TTS_THERE_NO_PAGE:
 			voice_prompt_abort();
 			memset(buf,0x00,256);
-			snprintf(buf,256,"%s: %s",_("There is no page."),_("Colse the menu."));
+			snprintf(buf,256,"%s: %s",_("There is no page."),_("Close the menu"));
 			*tts_is_running = 1;
 			voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_BU);
 			voice_prompt_string2(0, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,

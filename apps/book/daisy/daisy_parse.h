@@ -5,7 +5,6 @@
 #include "PlexDaisyAnalyzeAPI.h"
 #include "daisy_mark.h"
 
-
 typedef enum{
 	BMODE_INVALID = 0,
 	BMODE_AUDIO_ONLY= 0x1,

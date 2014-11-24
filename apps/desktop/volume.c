@@ -463,3 +463,14 @@ HandleuInfoMsg(int active)
 
 	SetVolume(active_app, 0);
 }
+int 
+GetInfoStat(void)
+{
+	return !!info_running;
+}
+
+void
+SetInfoStat(int state) 
+{
+	info_running = state;
+}

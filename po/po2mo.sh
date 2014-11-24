@@ -12,6 +12,7 @@ msgfmt zh_format.g.po -o ../mo/zh_CN/LC_MESSAGES/format.mo
 msgfmt zh_pc-connector.g.po -o ../mo/zh_CN/LC_MESSAGES/pc-connector.mo
 msgfmt zh_update_plextalk.g.po -o ../mo/zh_CN/LC_MESSAGES/update_plextalk.mo
 msgfmt zh_libinfo.g.po -o ../mo/zh_CN/LC_MESSAGES/libinfo.mo
+msgfmt zh_jump-page.g.po -o ../mo/zh_CN/LC_MESSAGES/jump-page.mo
 
 msgfmt tw_book.g.po -o ../mo/zh_TW/LC_MESSAGES/book.mo
 msgfmt tw_calculator.g.po -o ../mo/zh_TW/LC_MESSAGES/calculator.mo
@@ -27,6 +28,7 @@ msgfmt tw_format.g.po -o ../mo/zh_TW/LC_MESSAGES/format.mo
 msgfmt tw_pc-connector.g.po -o ../mo/zh_TW/LC_MESSAGES/pc-connector.mo
 msgfmt tw_update_plextalk.g.po -o ../mo/zh_TW/LC_MESSAGES/update_plextalk.mo
 msgfmt tw_libinfo.g.po -o ../mo/zh_TW/LC_MESSAGES/libinfo.mo
+msgfmt tw_jump-page.g.po -o ../mo/zh_TW/LC_MESSAGES/jump-page.mo
 
 msgfmt id_book.g.po -o ../mo/hi_IN/LC_MESSAGES/book.mo
 msgfmt id_calculator.g.po -o ../mo/hi_IN/LC_MESSAGES/calculator.mo
@@ -42,3 +44,4 @@ msgfmt id_format.g.po -o ../mo/hi_IN/LC_MESSAGES/format.mo
 msgfmt id_pc-connector.g.po -o ../mo/hi_IN/LC_MESSAGES/pc-connector.mo
 msgfmt id_update_plextalk.g.po -o ../mo/hi_IN/LC_MESSAGES/update_plextalk.mo
 msgfmt id_libinfo.g.po -o ../mo/hi_IN/LC_MESSAGES/libinfo.mo
+msgfmt id_jump-page.g.po -o ../mo/hi_IN/LC_MESSAGES/jump-page.mo

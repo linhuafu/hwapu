@@ -87,7 +87,7 @@ void book_prompt_play(enum tts_type type,char *prompt)
 		case BOOK_OPEN_ERR_NOT_ENOUGH_WORK_AREA:
 			voice_prompt_abort();
 			*tts_running = 1;
-			str_buf = _("The content size is too large. Can not play this content.");
+			str_buf = _("The content size is too large. Can not play this content");
 			voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_BU);
 			voice_prompt_string(1, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
 					tts_role, str_buf, strlen(str_buf)); 
@@ -96,12 +96,11 @@ void book_prompt_play(enum tts_type type,char *prompt)
 		case BOOK_OPEN_ERR_CONVERT_CHARSET:
 			voice_prompt_abort();
 			*tts_running = 1;
-			str_buf = _("The content code page is not match. Can not play this content.");
+			str_buf = _("The content code page is not match. Can not play this content");
 			voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_BU);
 			voice_prompt_string(1, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
 					tts_role, str_buf, strlen(str_buf)); 
 			break;
-			
 		case BOOK_BEGIN:
 			voice_prompt_abort();
 			*tts_running = 1;

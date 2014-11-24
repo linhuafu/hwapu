@@ -396,18 +396,31 @@ int text_getText(TextParse *thiz)
 {
 	int ret;
 	thiz->strSize = sizeof(thiz->strText)-2;
+	
 	memset(thiz->strText, 0, sizeof(thiz->strText));
+	
 	DBGMSG("ulOffset:%lld\n",thiz->ulOffset);
-	if(FILE_TYPE_TXT == thiz->filetype){
+	
+	if(FILE_TYPE_TXT == thiz->filetype)
+	{
 		ret = getText(thiz->ulOffset,thiz->strText, &thiz->strSize);
-	}else if(FILE_TYPE_DOC == thiz->filetype){
+		
+	}
+	else if(FILE_TYPE_DOC == thiz->filetype)
+	{
 		ret = doc_get_text(thiz->fp, thiz->ulOffset,thiz->strText, &thiz->strSize);
-	}else if(FILE_TYPE_DOCX == thiz->filetype){
+		
+	}
+	else if(FILE_TYPE_DOCX == thiz->filetype)
+	{
 		ret = docx_get_text(thiz->fp, thiz->ulOffset,thiz->strText, &thiz->strSize);
-	}else{
+	}
+	else
+	{
 		ret = -1;
 	}
 	DBGMSG("ret:%d strSize:%d\n",ret, thiz->strSize);
+	
 	if(-1 == ret){//-1 获取失败
 		thiz->isTextEnd = 1;
 	}else if(1 == ret){//1到文件结尾

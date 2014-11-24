@@ -251,7 +251,6 @@ int delete_result(app_delete_result* rqst)
 }
 //lhf end
 
-
 //lhf start 
 int book_jump_page(void *arg)
 {
@@ -279,7 +278,7 @@ int book_jump_page(void *arg)
 	if(!PlextalkIsDsiayBook(title)){
 		voice_prompt_music(0, &vprompt_cfg, VPROMPT_AUDIO_BU);
 		voice_prompt_string2(0, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang, tts_role,
-							_("DAISY contents is not selected."));
+							_("DAISY contents is not selected"));
 		return -1;
 	}
 
