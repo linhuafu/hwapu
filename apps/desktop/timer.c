@@ -60,7 +60,7 @@
 static struct plextalk_timer timer[3];//appk
 
 static TIMER *tickTimer;
-static TIMER *tickTimer1;
+//static TIMER *tickTimer1;
 static time_t suspend_time;
 
 static const int PlextalkCountdown[] = {
@@ -143,15 +143,15 @@ TimerExpire(sys_time_t *stm, int index,int *type)//appk 增加一个标记表示是countd
 				(timer[index].hour - stm->hour) * 60 +
 				(timer[index].minute - stm->min);
 	}
-
+	//once and every day
 	if (stm->hour < timer[index].hour ||
 		(stm->hour == timer[index].hour && stm->min < timer[index].minute))
 		return (timer[index].hour - stm->hour) * 60 +
 				(timer[index].minute - stm->min);
-
-	if (timer[index].repeat == PLEXTALK_ALARM_REPEAT_ONCE)
-		return -1;
-
+//bug
+//	if (timer[index].repeat == PLEXTALK_ALARM_REPEAT_ONCE)
+//		return -1;
+	//every day
 	return 24 * 60 +
 			(timer[index].hour - stm->hour) * 60 +
 			(timer[index].minute - stm->min);
@@ -337,20 +337,20 @@ OnTickTimer(WID__ wid)
 
 }
 
-static void
-OnTickTimer1(WID__ wid)
-{
-	sys_time_t stm;
+//static void
+//OnTickTimer1(WID__ wid)
+//{
+//	sys_time_t stm;
 
-	sys_get_time(&stm);
-	StatusBarRereshTime(&stm);
-}
+//	sys_get_time(&stm);
+//	StatusBarRereshTime(&stm);
+//}
 
 void
 TimerSettingChange(int index)
 {
 	sys_time_t stm;
-
+	DBGMSG("TimerSettingChange\n");
 	CoolShmReadLock(g_config_lock);
 	timer[index] = g_config->setting.timer[index];
 	CoolShmReadUnlock(g_config_lock);

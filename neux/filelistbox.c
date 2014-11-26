@@ -85,7 +85,7 @@ static const char* icons_name[] = {
 	THEME_ICON_MEDIA_TYPE_USB,
 };
 
-static GR_IMAGE_ID icons[9];
+static GR_IMAGE_ID icons[11];
 static int icons_inited;
 
 static void
