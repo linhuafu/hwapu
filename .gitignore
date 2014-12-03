@@ -36,3 +36,11 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+si_prj/
+bin/
+libs/libinfo.so
+libs/libplextalk-core.so
+libs/libplextalk-neux.so
+libs/libvprompt.so
+

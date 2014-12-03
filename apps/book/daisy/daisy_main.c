@@ -972,7 +972,7 @@ static int dsMain_jump_page(struct LstnBook *thiz, unsigned long ulpage)
 	ret = daisy_JumpPage(thiz->daisy_parse, ulpage);
 	DBGMSG("jump_page ret=%d\n",ret);
 	if(ret < 0){
-		if(PLEX_ERR_NOT_EXIST_PAGE == ret){
+		if(PLEX_ERR_NOT_EXIST_TARGET == ret){
 			NhelperJumpPageResult(APP_JUMP_NOT_EXIST_PAGE);
 		}else{
 			NhelperJumpPageResult(APP_JUMP_ERR);

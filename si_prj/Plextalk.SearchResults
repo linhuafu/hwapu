@@ -1,8 +1,0 @@
----- Book men Matches (7 in 2 files) ----
-Jump_page_main.c (f:\plextalk\src\apps\jump-page):	NhelperTitleBarSetContent(_("Book menu"));
-Jump_page_main.c (f:\plextalk\src\apps\jump-page):	NhelperTitleBarSetContent(_("Book menu"));
-Jump_page_main.c (f:\plextalk\src\apps\jump-page):	//NhelperTitleBarSetContent(_("Book menu"));
-Menu-defines.c (f:\plextalk\src\apps\menu):/* book menu */
-Menu-defines.c (f:\plextalk\src\apps\menu):	.caption		= _("Book menu"),
-Menu-defines.c (f:\plextalk\src\apps\menu):	.caption		= _("Book menu"),
-Menu-defines.c (f:\plextalk\src\apps\menu):	.caption		= _("Book menu"),

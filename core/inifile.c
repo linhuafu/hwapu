@@ -410,7 +410,7 @@ int  CoolGetIntValue(const char* pFile, const char* pSection,
     if (ret < 0)
         return ret;
 
-    *value = strtol (szBuff, NULL, 0);
+    *value = strtol (szBuff, NULL, 10);
     if ((*value == LONG_MIN || *value == LONG_MAX) && errno == ERANGE)
         return COOL_INI_INTCONV;
 
@@ -427,7 +427,7 @@ int  CoolGetUnlongValue(const char* pFile, const char* pSection,
     if (ret < 0)
         return ret;
 
-    *value = strtoul (szBuff, NULL, 0);
+    *value = strtoul (szBuff, NULL, 10);
     if (/*(*value == LONG_MIN || *value == LONG_MAX) &&*/ errno == ERANGE)
         return COOL_INI_INTCONV;
 

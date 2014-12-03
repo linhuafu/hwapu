@@ -246,7 +246,7 @@ page_key_right_handler (struct page_nano* nano)
 			 page_tts(TTS_ERRBEEP,NULL);
 			 return;
 		}
-		unsigned long page = strtoul(mpage_str.oktext, NULL, 0);
+		unsigned long page = strtoul(mpage_str.oktext, NULL, 10);
 		DBGMSG("page=%lu\n",page);
 		NhelperJumpPage(page);
 		appResponseLock();
