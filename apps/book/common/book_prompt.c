@@ -75,6 +75,15 @@ void book_prompt_play(enum tts_type type,char *prompt)
 			voice_prompt_string(1, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
 					tts_role, str_buf, strlen(str_buf)); 
 			break;
+			
+		case BOOK_TITLE_OPEN_LONG:
+			//voice_prompt_abort();
+			*tts_running = 1;
+			str_buf = _("Preparing for playback.");
+			voice_prompt_string(0, &vprompt_cfg, ivTTS_CODEPAGE_UTF8, tts_lang,
+					tts_role, str_buf, strlen(str_buf));
+			voice_prompt_music(1, &vprompt_cfg, VPROMPT_AUDIO_LONG_WAIT_BEEP);
+			break;
 
 		case BOOK_OPEN_ERR:
 			voice_prompt_abort();

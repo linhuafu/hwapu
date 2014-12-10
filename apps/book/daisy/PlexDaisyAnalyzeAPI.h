@@ -36,31 +36,31 @@ extern "C" {
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-#define	PLEX_OK							0
+#define	PLEX_OK							0				// API success.
 
 // Error codes
-#define PLEX_ERR						-1
-#define PLEX_ERR_NO_INITIALIZE			-2
-#define PLEX_ERR_PARSE					-3
-#define PLEX_ERR_PARSE_CANCEL			-4
-#define PLEX_ERR_NOT_DAISY_CONTENT		-5
-#define PLEX_ERR_OVER_CONTENT_SIZE		-6
-#define	PLEX_ERR_NOT_ENOUGH_MEMORY		-7
-#define PLEX_ERR_BAD_ORDER_PARSE		-8
-#define PLEX_ERR_NOT_EXEC_PARSE			-9
-#define PLEX_ERR_NOT_MULTIMEDIA_CONTENT	-10
-#define PLEX_ERR_MOVE_FAILED			-11
-#define PLEX_ERR_INTERNAL_ERROR			-12
-#define PLEX_ERR_INVALID_CONTENT		-13
-#define PLEX_ERR_INVALID_PARAMETER		-14
-#define PLEX_ERR_INVALID_PLAYMODE		-15
-#define PLEX_ERR_INVALID_POSITION		-16
-#define PLEX_ERR_NOT_EXIST_TARGET		-17
-#define PLEX_ERR_NOT_EXIST_SECTION		-18
-#define PLEX_ERR_NOT_EXIST_PAGE			-19
-#define PLEX_ERR_NOT_EXIST_GROUP		-20
-#define PLEX_ERR_REACH_TO_HEAD			-21
-#define PLEX_ERR_REACH_TO_TAIL			-22
+#define PLEX_ERR						-1				// API failure. (Some kind of errors.)
+#define PLEX_ERR_NO_INITIALIZE			-2				// The API for initialize SDK was not called.		
+#define PLEX_ERR_PARSE					-3				// It failed to parse Daisy contents.
+#define PLEX_ERR_PARSE_CANCEL			-4				// It canceled to parse Daisy contents.
+#define PLEX_ERR_NOT_DAISY_CONTENT		-5				// The current file was not Daisy contents.
+#define PLEX_ERR_OVER_CONTENT_SIZE		-6				// It exceeded the upper limit size for opening the file.
+#define	PLEX_ERR_NOT_ENOUGH_MEMORY		-7				// There was not enough memory area.
+#define PLEX_ERR_BAD_ORDER_PARSE		-8				// There were some problems concerning executed order of API for parsing Daisy contents.
+#define PLEX_ERR_NOT_EXEC_PARSE			-9				// The API for parsing Daisy contents was not finished.
+#define PLEX_ERR_NOT_MULTIMEDIA_CONTENT	-10				// The current file was not multimedia Daisy contents.
+#define PLEX_ERR_MOVE_FAILED			-11				// It failed to move.
+#define PLEX_ERR_INTERNAL_ERROR			-12				// The internal error occurred.
+#define PLEX_ERR_INVALID_CONTENT		-13				// The current file was the invalid contents.
+#define PLEX_ERR_INVALID_PARAMETER		-14				// The parameter for API was incorrect.
+#define PLEX_ERR_INVALID_PLAYMODE		-15				// The specified operation was not able to execute in the current play mode.
+#define PLEX_ERR_INVALID_POSITION		-16				// The specified operation was not able to execute in the current position.
+#define PLEX_ERR_NOT_EXIST_TARGET		-17				// There was not the target in the current opened Daisy contents.
+#define PLEX_ERR_NOT_EXIST_SECTION		-18				// There was not the section (heading) in the current opened Daisy contents.
+#define PLEX_ERR_NOT_EXIST_PAGE			-19				// There was not the page in the current opened Daisy contents.
+#define PLEX_ERR_NOT_EXIST_GROUP		-20				// There was not the group in the current opened Daisy contents.
+#define PLEX_ERR_REACH_TO_HEAD			-21				// It reached to the top position of Daisy contents.
+#define PLEX_ERR_REACH_TO_TAIL			-22				// It reached to the end position of Daisy contents.
 #define PLEX_ERR_NO_WORK_AREA			-23				// There was no work area.
 #define PLEX_ERR_NOT_ENOUGH_WORK_AREA	-24				// There was not enough size of a work area.
 #define PLEX_ERR_CONVERT_CHARSET		-25				// It failed to convert contents charset.

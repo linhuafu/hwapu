@@ -11,6 +11,12 @@
 #include "PlexDaisyAnalyzeAPI.h"
 #include "convert.h"
 
+#include <dirent.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#define BUSYBOX "/bin/busybox"
+
+
 #define OSD_DBG_MSG
 #include "nc-err.h"
 #define ERROR_PRINT 1
@@ -31,8 +37,12 @@
 #define CODE_PAGE_BIG5  950
 #define CODE_PAGE_ISCII 57002 //India
 
-//#define WORK_DIR_PATH "/tmp/work/"
-#define WORK_DIR_PATH  "/media/mmcblk0p2/"
+#define WORK_DIR_PATH "/tmp/Work/"
+//#define WORK_DIR_PATH  "/media/mmcblk0p2/"
+
+//#define WORK_DIR_PATH  "/media/mmcblk0p2/Work"
+
+
 #define WORK_DIR_SIZE (5*1024*1024L)
 
 /* sequential playback */
@@ -1406,6 +1416,17 @@ lexit:
 //==========================================================================================
 //  declaration of file access function
 //==========================================================================================
+
+int dir_exist(const char* dir) 
+{
+	DIR *pdir = opendir(dir);
+
+	if (pdir)
+		closedir(pdir);
+
+	return !!pdir;
+}
+
 #if 1
 static void* SdkFileOpen( const TCHAR* ptcFileName, const TCHAR* ptcMode )
 {
@@ -1429,6 +1450,7 @@ static void* SdkFileOpen( const TCHAR* ptcFileName, const TCHAR* ptcMode )
 	}
 	info_debug("SdkFileOpen:%s pMode:%s\n",pFile,pMode);
 	fp = fopen(pFile, pMode);
+	info_debug("SdkFileOpen: fp=%d\n",fp);
 	return (void*)fp;
 }
 #else
@@ -1481,7 +1503,7 @@ void* SdkFileOpen( const TCHAR* ptcFileName, const TCHAR* ptcMode )
 #endif
 static bool SdkFileRead( void* pFile, void* pBuffer, unsigned long ulSize, unsigned long* pulReadSize)
 {
-	info_debug("SdkFileRead\n");
+//	info_debug("SdkFileRead\n");
 	*pulReadSize = fread(pBuffer, 1, ulSize, (FILE *)pFile);
 	if(*pulReadSize == ulSize){
 		return true;
@@ -1496,13 +1518,31 @@ static bool SdkFileRead( void* pFile, void* pBuffer, unsigned long ulSize, unsig
 
 static bool SdkFileWrite( void* pFile, void* pBuffer, unsigned long ulSize, unsigned long* pulWriteSize)
 {
-	info_debug("SdkFileWrite\n");
+	//info_debug("SdkFileWrite fp=%d\n",pFile);
+
+	//info_debug("SdkFileWrite size=%d\n",ulSize);
+	
+	//info_debug("SdkFileWrite buf=%s\n",pBuffer);
+	
 	*pulWriteSize = fwrite(pBuffer, 1, ulSize, (FILE *)pFile);
-	if(*pulWriteSize == ulSize){
+
+	//info_debug("SdkFileWrite pulWriteSize=%d\n",*pulWriteSize);
+	
+	
+	if(*pulWriteSize == ulSize)
+	{
+
+
+	//	info_debug("SdkFileWrite  equal\n");
 		return true;
-	}else{
+	}
+	else
+	{
+	//	info_debug("SdkFileWrite  not equal\n");
+		
 		return false;
 	}
+	
 }
 
 static unsigned long SdkFileSeek(void* pFile, unsigned long ulPos, int iStartPoint)
@@ -1553,13 +1593,171 @@ static int SdkFileDelete(const TCHAR* ptcFileName)
 	return iRet;
 }
 
+int unzip_file_onefile (const char* file, const char* unzipfile ,  const char* dir) 
+{
+
+	if (!file || !dir)
+	{
+		info_debug("unzip_file_onefile  parameter error.\n");
+		return -1;
+	}
+	
+
+	if (access(file, F_OK) != 0)
+	{
+		info_debug("unzip_file_onefile: %s, %d: %s not exist!!!\n", __func__, __LINE__, file);
+		return -1;
+	}
+
+
+	if (!dir_exist(dir)) 
+	{
+		info_debug("unzip_file_onefile: %s, %d: %s dir not exist!!!\n", __func__, __LINE__, dir);
+		return -1;
+	}
+
+	pid_t pid;
+	int status;
+
+	pid = vfork();
+	
+	if (pid == 0) 
+	{
+		if (execl(BUSYBOX, "unzip", file,unzipfile, "-d", dir, NULL) < 0) 
+		{
+			perror("execl error:");
+		}
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+	
+	return 0;
+}
+
+
+
+
+
+int unzip_file_all (const char* file, const char* dir) 
+{
+
+	if (!file || !dir)
+	{
+		info_debug("unzip_file_all  parameter error.\n");
+		return -1;
+	}
+	
+
+	if (access(file, F_OK) != 0)
+	{
+		info_debug("unzip_file_all: %s, %d: %s not exist!!!\n", __func__, __LINE__, file);
+		return -1;
+	}
+
+
+	if (!dir_exist(dir)) 
+	{
+		info_debug("unzip_file_all: %s, %d: %s dir not exist!!!\n", __func__, __LINE__, dir);
+		return -1;
+	}
+
+	pid_t pid;
+	int status;
+
+	pid = vfork();
+	
+	if (pid == 0) 
+	{
+		if (execl(BUSYBOX, "unzip", file, "-d", dir, NULL) < 0) 
+		{
+			perror("execl error:");
+		}
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+	
+	return 0;
+}
+
+
+
+
+/****************************************
+ ptcZipFile=/media/mmcblk0p2/book/EPUB2/Frankenstein_or_The_Modern_Prometheus.epub
+ 
+ptcGetFilename=META-INF/container.xml
+
+ptcExpandPath=/tmp/Work/Temporary/
+
+******************************************/
 static bool SdkFileUnzip(const TCHAR* ptcZipFile, const TCHAR* ptcGetFilename, const TCHAR* ptcExpandPath)
 {
 	bool blRet = false;
-	info_debug("SdkFileUnzip\n");
-	blRet = true;
+	
+	char pMode[PATH_MAX];
+	
+	size_t	iLen,outleft;
+	
+	char filename[PATH_MAX];
+
+	char savepath[PATH_MAX];
+	
+	char tempname[PATH_MAX];
+	int iret=0;
+	
+	
+	FILE *fp=0;
+	 unsigned long   filesize=0;
+	 
+	info_debug("Enter SdkFileUnzip fun\n");
+	
+	memset(filename, 0, sizeof(filename));
+	iLen = _tcslen(ptcZipFile)*sizeof(TCHAR);
+	outleft = PATH_MAX;
+	utf32_to_utf8(ptcZipFile, &iLen, filename, &outleft);
+		
+	info_debug("ptcZipFile=%s\n",filename);
+	
+//================================
+
+	memset(tempname, 0, sizeof(tempname));
+	iLen = _tcslen(ptcGetFilename)*sizeof(TCHAR);
+	outleft = PATH_MAX;
+	utf32_to_utf8(ptcGetFilename, &iLen, tempname, &outleft);
+	
+	info_debug("ptcGetFilename=%s\n",tempname);
+
+//================================
+
+	memset(savepath, 0, sizeof(savepath));
+	iLen = _tcslen(ptcExpandPath)*sizeof(TCHAR);
+	outleft = PATH_MAX;
+	utf32_to_utf8(ptcExpandPath, &iLen, savepath, &outleft);
+	
+	info_debug("ptcExpandPath=%s\n",savepath);
+
+   //iret =unzip_file_all(filename,savepath);
+
+     iret =unzip_file_onefile(filename,tempname,savepath);
+   
+    info_debug("unzip_file return =%d\n",iret);
+
+	if(iret==0)
+	{
+		blRet = true;
+	
+	}
+	else
+	{
+		blRet = false;
+	}
 
 	return blRet;
+	
 }
 
 static int SdkDirCreate(const TCHAR* ptcDirName)
@@ -1578,6 +1776,11 @@ static int SdkDirCreate(const TCHAR* ptcDirName)
 	}else{
 		strlcpy(pDirname, ptcDirName, PATH_MAX);
 	}
+
+	if(dir_exist(pDirname)){
+		return 0;
+	}
+
 	info_debug("SdkDirCreate=%s\n",pDirname);
 	iRet = mkdir(pDirname, 0x0FFF);
 	info_debug("iRet=%d\n",iRet);
@@ -1793,7 +1996,6 @@ DaisyParse *daisy_open(const char *fname)
 	memset(thiz, 0, sizeof(DaisyParse));
 
 	strlcpy(thiz->daisy_file, fname, sizeof(thiz->daisy_file));
-
 	// Initialize Daisy SDK
 	thiz->fileAccess.FileOpen   = SdkFileOpen;
 	thiz->fileAccess.FileRead   = SdkFileRead;
@@ -1924,6 +2126,16 @@ void daisy_close(DaisyParse *thiz)
 	}
 }
 
+
+static int delete_Temporary(void)
+{
+	char cmd[PATH_MAX];
+	snprintf(cmd, sizeof(cmd), "rm -rf \"%s\"", "/tmp/Work/Temporary/");
+	info_debug("cmd=%s\n", cmd);
+	system(cmd); 
+	return 0;
+}
+
 PlexResult ConvertHtmlEpubToText(const char *filepath, char *outfile, const int bufsize)
 {
 	TCHAR tchPath[PATH_MAX];
@@ -1943,10 +2155,29 @@ PlexResult ConvertHtmlEpubToText(const char *filepath, char *outfile, const int 
 	fileAccess.FileUnzip  = SdkFileUnzip;
 	fileAccess.DirCreate  = SdkDirCreate;
 	fileAccess.DirDelete  = SdkDirDelete;
+
+	info_debug("Enter ConvertHtmlEpubToText\n");
+
+	if (!dir_exist(WORK_DIR_PATH)) 
+	{//ц╩сп/tmp/Work/
+		info_debug("tmp/Work   no exist %s, %d: work dir not exist!!!\n", __func__, __LINE__);
+
+		if (mkdir(WORK_DIR_PATH, 0x0FFF) == -1) 
+		{
+			info_debug("creat tem.Work  error!\n");
+		} 
+		else
+		{
+			info_debug("creat tem.Work  sucess!\n");
+		}
+	}
 	
 	memset(workdir, 0, sizeof(workdir));
+	
 	in_ret = strlen(WORK_DIR_PATH);
+	
 	out_ret = sizeof(workdir);
+	
 	utf8_to_utf32((char*)WORK_DIR_PATH, &in_ret,
 		(char*)workdir, &out_ret);
 
@@ -1963,16 +2194,28 @@ PlexResult ConvertHtmlEpubToText(const char *filepath, char *outfile, const int 
 	utf8_to_utf32((char*)filepath, &in_ret,
 		(char*)tchPath, &out_ret);
 	info_debug("first\n");
+	
 	// Parse Html/EPUB Content
-	result = PlexDaisyConvertToText(tchPath, NULL);
-	if(result == PLEX_OK){
+	result = PlexDaisyConvertToText(tchPath, workdir);
+	
+	if(result == PLEX_OK)
+	{
 		info_debug("Convert Text from Html/EPUB : success...\n");
+		delete_Temporary();
+		
 		char* filename = PlextalkGetFilenameFromPath(filepath);
+		
 		strlcpy(outfile, WORK_DIR_PATH, bufsize);
+		
 		PlextalkGetRealnameOfFilename(filename, tchPath, sizeof(tchPath));
+		
 		strlcat(outfile, tchPath, bufsize);
+		
 		strlcat(outfile, ".txt", bufsize);
-	}else if(result == PLEX_ERR_UNZIP){
+		
+	}
+	else if(result == PLEX_ERR_UNZIP)
+	{
 		info_debug("Convert Text from Html/EPUB : unzip error...\n");
 	}else if(result == PLEX_ERR_NO_WORK_AREA){
 		info_debug("Convert Text from Html/EPUB : no work area error...\n");

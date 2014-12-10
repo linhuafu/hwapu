@@ -94,7 +94,7 @@ struct TextBook{
 	struct plextalk_setting setting;
 
 	char 				textfile[PATH_MAX];
-	char					genfile[PATH_MAX];
+	char				genfile[PATH_MAX];
 		
 	OPEN_STATE			open_state;
 	EXIT_TYPE			exit_type;
@@ -153,6 +153,31 @@ static void txMain_grabKey (struct TextBook*thiz);
 static void txMain_ungrabKey (struct TextBook*thiz);
 static void OnWindowRedraw(int clrBg);
 static int txMain_endStop(struct TextBook *thiz);
+
+
+static const char * const html_epub[] = {
+	"htm",
+	"html",
+	"epub",
+	NULL
+};
+
+static int isTheFile(const char * name, const char * const * p)
+{
+    char* ext;
+
+	ext = PlextalkGetFileExtension(name);
+	if (NULL == ext)
+		return 0;
+
+	while (*p) {
+		if (!strcasecmp(ext, *p))
+			return 1;
+		p++;
+	}
+
+	return 0;
+}
 
 static int txMain_isOpen(struct TextBook *thiz)
 {
@@ -1210,6 +1235,11 @@ static int txMain_closeCurBook(struct TextBook *thiz, int bDelFile)
 			strlcpy(markfile, file, PATH_MAX);
 		}
 		text_close(thiz->text_parse);
+
+		if(isTheFile(thiz->textfile, html_epub)){
+			//html epub,del gen txt file 
+			remove(thiz->genfile);
+		}
 		info_debug("book_close end\n");
 		thiz->text_parse = 0;
 	}
@@ -1264,31 +1294,6 @@ static void txMain_initAudio(struct TextBook *thiz)
 	return ;
 }
 
-
-static const char * const html_epub[] = {
-	"htm",
-	"html",
-	"epub",
-	NULL
-};
-
-static int isTheFile(const char * name, const char * const * p)
-{
-    char* ext;
-
-	ext = PlextalkGetFileExtension(name);
-	if (NULL == ext)
-		return 0;
-
-	while (*p) {
-		if (!strcasecmp(ext, *p))
-			return 1;
-		p++;
-	}
-
-	return 0;
-}
-
 //open 
 static int txMain_openNewBook(struct TextBook *thiz)
 {
@@ -1305,13 +1310,21 @@ static int txMain_openNewBook(struct TextBook *thiz)
 	
 	//info_debug("open new file:%s\n", thiz->textfile);
 	thiz->open_state = TEXT_OPENING;
-	txMain_playPrompt(BOOK_TITLE_OPEN, NULL, txMain_openEndCb);
+	if(isTheFile(thiz->textfile, html_epub))
+	{	//play long wait beep audio
+		txMain_playPrompt(BOOK_TITLE_OPEN_LONG, NULL, txMain_openEndCb);
+	}
+	else
+	{
+		txMain_playPrompt(BOOK_TITLE_OPEN, NULL, txMain_openEndCb);
+	}
 
 	//1.is text book
 	ret = PlextalkIsBookFile(thiz->textfile);
 	if(!ret){
 		info_err("not text book\n");
 		thiz->open_state = TEXT_OPEN_ERR;
+		ret = -1;
 		goto fail;
 	}
 //============================================
@@ -1327,6 +1340,7 @@ static int txMain_openNewBook(struct TextBook *thiz)
 			}else{
 				thiz->open_state = TEXT_OPEN_ERR;
 			}
+			ret = -1;
 			goto fail;
 		}
 	}else{
@@ -1337,6 +1351,7 @@ static int txMain_openNewBook(struct TextBook *thiz)
 	thiz->text_parse = text_open(thiz->textfile, thiz->genfile); 
 	if(NULL == thiz->text_parse){
 		thiz->open_state = TEXT_OPEN_ERR;
+		ret = -1;
 		goto fail;
 	}
 
@@ -1371,9 +1386,14 @@ static int txMain_openNewBook(struct TextBook *thiz)
 	txMain_initAudio(thiz);
 	
 	thiz->open_state = TEXT_OPEN_OK;
-	return 0;
+	ret = 0;
 fail:
-	return -1;
+	if(isTheFile(thiz->textfile, html_epub))
+	{	//stop long wait beep 
+		txMain_stopPrompt();
+		txMain_openEndCb(thiz);
+	}
+	return ret;
 }
 
 static void txMain_destroy(struct TextBook *thiz)
@@ -1406,6 +1426,7 @@ static void txMain_destroy(struct TextBook *thiz)
 			text_close(thiz->text_parse);
 			thiz->text_parse = 0;
 		}
+
 
 		txMain_ungrabKey(thiz);
 		app_free(thiz);

@@ -226,10 +226,12 @@ ReschduleTimer(sys_time_t *stm)
 //	sysfs_write_integer(PLEXTAL_RTC_WAKEALARM, stm->raw + alarm * 60);	//res
 
 //wrtie with xx:xx:00	
-	int w_time = stm->raw + alarm * 60;
-	int s_time = w_time - w_time % 60;
-	sysfs_write_integer(PLEXTAL_RTC_WAKEALARM, s_time);
+	time_t w_time = stm->raw + alarm * 60;
+	time_t s_time = w_time - w_time % 60;
 
+	printf("s_time:%lu\n",s_time);		//add by lhf
+	sysfs_write_integer(PLEXTAL_RTC_WAKEALARM, 0); //add by lhf
+	sysfs_write_integer(PLEXTAL_RTC_WAKEALARM, s_time);
 
 	printf("set countdown time:%d\n",countdown);//write to Hardware Timer units:minute
 	if(countdown == -1)
@@ -362,6 +364,8 @@ TimerSettingChange(int index)
 	}
 
 	sys_get_time(&stm);
+
+	printf("stm.raw:%lu\n",stm.raw);		//add by lhf
 	ReschduleTimer(&stm);
 }
 
